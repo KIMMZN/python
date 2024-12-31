@@ -17,4 +17,4 @@ profile = ProfileReport(
 )
 
 #리포트 저장 및 출력
-profile.to_file("./report/eda_report1.html")
+profile.to_file("./report/eda_report3.html")

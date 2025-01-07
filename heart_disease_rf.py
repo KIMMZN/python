@@ -9,7 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 from imblearn.over_sampling import SMOTE
 
@@ -79,7 +79,19 @@ st.pyplot(fig)
 st.write("분류 보고서:")
 st.text(classification_report(y_test, y_pred))
 
+# 6. 혼동행렬 시각화
+st.subheader("6. 혼동행렬 (Confusion Matrix)")
 
+# 혼동행렬 생성
+cm = confusion_matrix(y_test, y_pred, labels=model.classes_)
+
+# 혼동행렬 시각화
+fig, ax = plt.subplots(figsize=(6, 5))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=model.classes_, yticklabels=model.classes_, ax=ax)
+ax.set_title("Confusion Matrix")
+ax.set_xlabel("Predicted Labels")
+ax.set_ylabel("True Labels")
+st.pyplot(fig)
 
 # 7. 실제값과 예측값 비교 (히스토그램)
 st.subheader("7. 실제값과 예측값 비교")
